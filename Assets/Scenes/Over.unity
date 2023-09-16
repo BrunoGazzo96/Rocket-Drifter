@@ -308,10 +308,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1237466804, guid: 7ec69ac047d1182469870a9b1e756328, type: 3}
-      propertyPath: m_PlayOnAwake
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7109040335965919551, guid: 7ec69ac047d1182469870a9b1e756328, type: 3}
       propertyPath: m_Name
       value: Rocket
@@ -326,7 +322,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7408993541960083937, guid: 7ec69ac047d1182469870a9b1e756328, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 13.7
+      value: 4.5
       objectReference: {fileID: 0}
     - target: {fileID: 7408993541960083937, guid: 7ec69ac047d1182469870a9b1e756328, type: 3}
       propertyPath: m_LocalPosition.z
@@ -375,15 +371,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3487730208344051410, guid: 2da4ce74610c9024ba37072b6bf56eb6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3487730208344051410, guid: 2da4ce74610c9024ba37072b6bf56eb6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7.4
+      value: 10.81
       objectReference: {fileID: 0}
     - target: {fileID: 3487730208344051410, guid: 2da4ce74610c9024ba37072b6bf56eb6, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.04
       objectReference: {fileID: 0}
     - target: {fileID: 3487730208344051410, guid: 2da4ce74610c9024ba37072b6bf56eb6, type: 3}
       propertyPath: m_LocalRotation.w
