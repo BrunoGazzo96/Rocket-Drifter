@@ -3,6 +3,11 @@ using UnityEngine;
 
 public class CollisionHandler : MonoBehaviour
 {
+
+    [SerializeField] float levelLoadDelay = 1f;
+    [SerializeField] AudioClip explosion;
+    [SerializeField] AudioClip success;
+
     void OnCollisionEnter(Collision other)
     {
         switch (other.gameObject.tag)
@@ -11,7 +16,7 @@ public class CollisionHandler : MonoBehaviour
                 Debug.Log("Iniciando");
                 break;
             case "Finish":
-                LoadNextLevel();
+                StartSuccessSequence();
                 break;
             default:
                 StartCrashSequence();
@@ -23,7 +28,10 @@ public class CollisionHandler : MonoBehaviour
     {
         GetComponent<Movement>().enabled = false;
         GetComponent<AudioSource>().Pause();
-        Invoke(nameof(ReloadLevel), 1f);
+        GetComponent<AudioSource>().PlayOneShot(explosion);
+        Rigidbody rb = GetComponent<Rigidbody>();
+        rb.constraints = RigidbodyConstraints.FreezeAll;
+        Invoke(nameof(ReloadLevel), levelLoadDelay);
     }
 
     void ReloadLevel()
@@ -32,8 +40,19 @@ public class CollisionHandler : MonoBehaviour
         SceneManager.LoadScene(currentSceneIndex);
     }
 
-    void LoadNextLevel()
+    void StartSuccessSequence()
     {
+        GetComponent<Movement>().enabled = false;
+        GetComponent<AudioSource>().Pause();
+        GetComponent<AudioSource>().PlayOneShot(success);
+        Rigidbody rb = GetComponent<Rigidbody>();
+        rb.constraints = RigidbodyConstraints.FreezeAll;
+       
+        Invoke(nameof(LoadNextLevel), levelLoadDelay);
+    }
+
+    void LoadNextLevel()
+    {        
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         int nextSceneIndex = currentSceneIndex + 1;
         if(nextSceneIndex == SceneManager.sceneCountInBuildSettings)
