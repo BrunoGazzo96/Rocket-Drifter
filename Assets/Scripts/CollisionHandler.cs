@@ -8,8 +8,15 @@ public class CollisionHandler : MonoBehaviour
     [SerializeField] AudioClip explosion;
     [SerializeField] AudioClip success;
 
+    [SerializeField] ParticleSystem explosionParticles;
+    [SerializeField] ParticleSystem successParticles;
+
+    bool isTransitioning = false;
+
     void OnCollisionEnter(Collision other)
     {
+        if (isTransitioning) { return; }
+
         switch (other.gameObject.tag)
         {
             case "Friendly":
@@ -22,12 +29,15 @@ public class CollisionHandler : MonoBehaviour
                 StartCrashSequence();
                 break;
         }
+
     }
 
     void StartCrashSequence()
     {
+        isTransitioning = true;
+        explosionParticles.Play();
         GetComponent<Movement>().enabled = false;
-        GetComponent<AudioSource>().Pause();
+        GetComponent<AudioSource>().Stop();
         GetComponent<AudioSource>().PlayOneShot(explosion);
         Rigidbody rb = GetComponent<Rigidbody>();
         rb.constraints = RigidbodyConstraints.FreezeAll;
@@ -42,20 +52,22 @@ public class CollisionHandler : MonoBehaviour
 
     void StartSuccessSequence()
     {
+        isTransitioning = true;
+        successParticles.Play();
         GetComponent<Movement>().enabled = false;
-        GetComponent<AudioSource>().Pause();
+        GetComponent<AudioSource>().Stop();
         GetComponent<AudioSource>().PlayOneShot(success);
         Rigidbody rb = GetComponent<Rigidbody>();
         rb.constraints = RigidbodyConstraints.FreezeAll;
-       
+
         Invoke(nameof(LoadNextLevel), levelLoadDelay);
     }
 
     void LoadNextLevel()
-    {        
+    {
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         int nextSceneIndex = currentSceneIndex + 1;
-        if(nextSceneIndex == SceneManager.sceneCountInBuildSettings)
+        if (nextSceneIndex == SceneManager.sceneCountInBuildSettings)
         {
             nextSceneIndex = 0;
         }
