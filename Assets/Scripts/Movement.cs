@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Movement : MonoBehaviour
 {
@@ -23,8 +24,8 @@ public class Movement : MonoBehaviour
     void Update()
     {
         ProcessThrust();
-        ProcessRotation();
-    }
+        ProcessRotation();        
+    }    
 
     void ProcessThrust()
     {
@@ -102,5 +103,5 @@ public class Movement : MonoBehaviour
         rb.freezeRotation = true;
         transform.Rotate(rotation * Time.deltaTime * Vector3.forward);
         rb.freezeRotation = false;
-    }
+    }    
 }
